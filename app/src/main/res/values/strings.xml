@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Recipes Now</string>
+    <string name="title_recipedetail_list">RecipeDetails</string>
+    <string name="title_recipedetail_detail">RecipeDetail Detail</string>
+</resources>
