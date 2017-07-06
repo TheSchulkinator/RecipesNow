@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-public class IngridentModel {
+public class IngredientModel {
     @SerializedName("quantity")
     @Expose
     private Integer quantity;

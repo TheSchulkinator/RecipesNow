@@ -2,4 +2,7 @@
     <string name="app_name">Recipes Now</string>
     <string name="title_recipedetail_list">RecipeDetails</string>
     <string name="title_recipedetail_detail">RecipeDetail Detail</string>
+
+    <!--Base URL for retrofit call-->
+    <string name="base_url" translatable="false">https://d17h27t6h515a5.cloudfront.net/</string>
 </resources>
