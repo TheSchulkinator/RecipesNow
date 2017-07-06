@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 public class IngredientModel {
     @SerializedName("quantity")
     @Expose
-    private Integer quantity;
+    private Double quantity;
     @SerializedName("measure")
     @Expose
     private String measure;
@@ -15,11 +15,11 @@ public class IngredientModel {
     @Expose
     private String ingredient;
 
-    public Integer getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 

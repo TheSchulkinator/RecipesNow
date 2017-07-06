@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.example.theschulk.recipesnow.dummy.DummyContent;
 
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class RecipeDetailListActivity extends AppCompatActivity {
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
-     */
+     *
     private boolean mTwoPane;
 
     @Override
@@ -137,5 +136,5 @@ public class RecipeDetailListActivity extends AppCompatActivity {
                 return super.toString() + " '" + mContentView.getText() + "'";
             }
         }
-    }
+    }*/
 }

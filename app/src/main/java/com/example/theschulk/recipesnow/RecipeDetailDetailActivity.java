@@ -17,7 +17,7 @@ import android.view.MenuItem;
  * in a {@link RecipeDetailListActivity}.
  */
 public class RecipeDetailDetailActivity extends AppCompatActivity {
-
+/*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,5 +77,5 @@ public class RecipeDetailDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 }
