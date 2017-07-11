@@ -15,6 +15,8 @@ import retrofit2.Response;
 
 public class RecipeListActivity extends AppCompatActivity {
 
+    List<RecipeModel> currentRecipes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +30,8 @@ public class RecipeListActivity extends AppCompatActivity {
         recipeEndpointInterface.getRecipes().enqueue(new Callback<List<RecipeModel>>() {
             @Override
             public void onResponse(Call<List<RecipeModel>> call, Response<List<RecipeModel>> response) {
-                List<RecipeModel> rm = response.body();
+                currentRecipes = response.body();
+                String[] currentRecipes;
             }
 
             @Override
