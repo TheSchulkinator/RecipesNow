@@ -7,12 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.theschulk.recipesnow.Models.RecipeModel;
 import com.example.theschulk.recipesnow.R;
+
+import java.util.List;
 
 
 public class RecipeListRecyclerViewAdapter extends RecyclerView.Adapter<RecipeListRecyclerViewAdapter.RecipeListViewHolder> {
 
-    private String[] mRecipeList;
+    private List<RecipeModel> mRecipeList;
 
     @Override
     public RecipeListViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -27,14 +30,17 @@ public class RecipeListRecyclerViewAdapter extends RecyclerView.Adapter<RecipeLi
 
     @Override
     public void onBindViewHolder(RecipeListViewHolder holder, int position) {
-        holder.recipeListTextView.setText(mRecipeList[position]);
+
+        RecipeModel currentRecipe = mRecipeList.get(position);
+        String currentRecipeItemInList = currentRecipe.getName();
+        holder.recipeListTextView.setText(currentRecipeItemInList);
     }
 
 
     @Override
     public int getItemCount() {
         if(mRecipeList == null) return 0;
-        return mRecipeList.length;
+        return mRecipeList.size();
     }
 
     public class RecipeListViewHolder extends RecyclerView.ViewHolder{
@@ -48,7 +54,7 @@ public class RecipeListRecyclerViewAdapter extends RecyclerView.Adapter<RecipeLi
 
     }
 
-    public void setRecipeListIntoRecyclerView(String[] recipeList){
+    public void setRecipeListIntoRecyclerView(List<RecipeModel> recipeList){
         mRecipeList = recipeList;
         notifyDataSetChanged();
     }
