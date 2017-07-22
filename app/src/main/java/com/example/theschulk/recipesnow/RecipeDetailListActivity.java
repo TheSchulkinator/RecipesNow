@@ -22,7 +22,7 @@ import java.util.List;
  * An activity representing a list of RecipeDetails. This activity
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link RecipeDetailDetailActivity} representing
+ * lead to a {@link SingleRecipeDetailActivity} representing
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
@@ -39,18 +39,7 @@ public class RecipeDetailListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipedetail_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         View recyclerView = findViewById(R.id.recipedetail_list);
         assert recyclerView != null;
@@ -96,16 +85,16 @@ public class RecipeDetailListActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putString(RecipeDetailDetailFragment.ARG_ITEM_ID, holder.mItem.id);
-                        RecipeDetailDetailFragment fragment = new RecipeDetailDetailFragment();
+                        arguments.putString(SingleRecipeDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        SingleRecipeDetailFragment fragment = new SingleRecipeDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.recipedetail_detail_container, fragment)
                                 .commit();
                     } else {
                         Context context = v.getContext();
-                        Intent intent = new Intent(context, RecipeDetailDetailActivity.class);
-                        intent.putExtra(RecipeDetailDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        Intent intent = new Intent(context, SingleRecipeDetailActivity.class);
+                        intent.putExtra(SingleRecipeDetailFragment.ARG_ITEM_ID, holder.mItem.id);
 
                         context.startActivity(intent);
                     }

@@ -1,6 +1,7 @@
 package com.example.theschulk.recipesnow.RecyclerViewAdapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,16 @@ import java.util.List;
 public class RecipeListRecyclerViewAdapter extends RecyclerView.Adapter<RecipeListRecyclerViewAdapter.RecipeListViewHolder> {
 
     private List<RecipeModel> mRecipeList;
+    private RecipeListClickHandler mRecipeListClickHandler;
+    private RecipeModel selectedRecipe;
+
+    public interface RecipeListClickHandler{
+        void onClick(RecipeModel selectedRecipeModel);
+    }
+
+    public RecipeListRecyclerViewAdapter(RecipeListClickHandler clickHandler){
+        mRecipeListClickHandler = clickHandler;
+    }
 
     @Override
     public RecipeListViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -43,15 +54,22 @@ public class RecipeListRecyclerViewAdapter extends RecyclerView.Adapter<RecipeLi
         return mRecipeList.size();
     }
 
-    public class RecipeListViewHolder extends RecyclerView.ViewHolder{
+    public class RecipeListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView recipeListTextView;
 
         public RecipeListViewHolder(View view){
             super(view);
             recipeListTextView = (TextView) view.findViewById(R.id.tv_recipe_list);
+            view.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View v) {
+            int adapterPosition = getAdapterPosition();
+            selectedRecipe = mRecipeList.get(adapterPosition);
+            mRecipeListClickHandler.onClick(selectedRecipe);
+        }
     }
 
     public void setRecipeListIntoRecyclerView(List<RecipeModel> recipeList){

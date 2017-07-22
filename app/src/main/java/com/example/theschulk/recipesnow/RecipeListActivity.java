@@ -1,5 +1,7 @@
 package com.example.theschulk.recipesnow;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,17 +12,19 @@ import com.example.theschulk.recipesnow.Data.RetrofitUtils;
 import com.example.theschulk.recipesnow.Models.RecipeModel;
 import com.example.theschulk.recipesnow.RecyclerViewAdapters.RecipeListRecyclerViewAdapter;
 
+import java.io.Serializable;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RecipeListActivity extends AppCompatActivity {
+public class RecipeListActivity extends AppCompatActivity implements RecipeListRecyclerViewAdapter.RecipeListClickHandler {
 
     List<RecipeModel> currentRecipes;
     private RecipeListRecyclerViewAdapter mRecipeViewAdapter;
     private RecyclerView mRecipeRecyclerView;
+    private Boolean mTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +32,7 @@ public class RecipeListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_list);
 
         mRecipeRecyclerView = (RecyclerView) findViewById(R.id.rv_recipe_list);
-        mRecipeViewAdapter = new RecipeListRecyclerViewAdapter();
+        mRecipeViewAdapter = new RecipeListRecyclerViewAdapter(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecipeRecyclerView.setAdapter(mRecipeViewAdapter);
         mRecipeRecyclerView.setLayoutManager(linearLayoutManager);
@@ -52,5 +56,24 @@ public class RecipeListActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onClick(RecipeModel selectedRecipeModel) {
+        //implement navigation to activity with the fragments for the recipeDetail
+        if (findViewById(R.id.recipedetail_detail_container) != null) {mTwoPane = true;}
+        Context context = this;
+        Class destinationClass;
+        Intent singleOrTwoPainClass;
 
+        if(mTwoPane){
+            destinationClass = RecipeDetailListActivity.class;
+            singleOrTwoPainClass = new Intent(context, destinationClass);
+            singleOrTwoPainClass.putExtra("Selected Recipe", (Serializable) selectedRecipeModel);
+            startActivity(singleOrTwoPainClass);
+        }else {
+            destinationClass = SingleRecipeDetailActivity.class;
+            singleOrTwoPainClass = new Intent(context, destinationClass);
+            singleOrTwoPainClass.putExtra("Selected Recipe", (Serializable) selectedRecipeModel);
+            startActivity(singleOrTwoPainClass);
+        }
+    }
 }
