@@ -3,8 +3,10 @@ package com.example.theschulk.recipesnow.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 
-public class IngredientModel {
+@SuppressWarnings("serial")
+public class IngredientModel implements Serializable {
     @SerializedName("quantity")
     @Expose
     private Double quantity;

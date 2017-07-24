@@ -4,7 +4,10 @@ package com.example.theschulk.recipesnow.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class StepModel {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class StepModel implements Serializable{
     @SerializedName("id")
     @Expose
     private Integer id;

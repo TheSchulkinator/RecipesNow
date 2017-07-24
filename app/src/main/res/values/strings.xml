@@ -7,5 +7,5 @@
     <string name="base_url" translatable="false">https://d17h27t6h515a5.cloudfront.net/</string>
 
     <!--String constants for bundles-->
-    <string name="current_recipe_bundle" translatable="false">CurrentRecipe</string>
+    <string name="current_recipe_bundle" translatable="false">Selected Recipe</string>
 </resources>

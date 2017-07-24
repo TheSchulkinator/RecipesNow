@@ -6,7 +6,7 @@ import java.util.List;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class RecipeModel {
+public class RecipeModel implements Serializable {
 
     @SerializedName("id")
     @Expose

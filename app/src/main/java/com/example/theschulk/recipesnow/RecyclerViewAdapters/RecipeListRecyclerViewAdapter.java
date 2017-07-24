@@ -1,7 +1,6 @@
 package com.example.theschulk.recipesnow.RecyclerViewAdapters;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +53,7 @@ public class RecipeListRecyclerViewAdapter extends RecyclerView.Adapter<RecipeLi
         return mRecipeList.size();
     }
 
-    public class RecipeListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class RecipeListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView recipeListTextView;
 
