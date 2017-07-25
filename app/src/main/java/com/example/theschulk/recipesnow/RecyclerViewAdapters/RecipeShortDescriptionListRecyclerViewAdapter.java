@@ -13,14 +13,14 @@ import com.example.theschulk.recipesnow.R;
 
 import java.util.List;
 
-public class RecipeStepListRecyclerViewAdapter extends RecyclerView.Adapter<RecipeStepListRecyclerViewAdapter.RecipeStepListViewHolder> {
+public class RecipeShortDescriptionListRecyclerViewAdapter extends RecyclerView.Adapter<RecipeShortDescriptionListRecyclerViewAdapter.RecipeStepListViewHolder> {
 
     RecipeModel mCurrentRecipeModel;
 
     @Override
     public RecipeStepListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-        int layoutIdForRecycleView = R.layout.recipe_step_list;
+        int layoutIdForRecycleView = R.layout.recipe_short_description_list;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParent = false;
 

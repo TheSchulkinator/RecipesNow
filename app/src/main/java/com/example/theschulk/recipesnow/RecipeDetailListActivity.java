@@ -1,28 +1,12 @@
 package com.example.theschulk.recipesnow;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-
-
-import java.util.List;
 
 /**
  * An activity representing a list of RecipeDetails. This activity
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link SingleRecipeDetailActivity} representing
+ * lead to a {@link RecipeShortDescriptionListActivity} representing
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
@@ -85,16 +69,16 @@ public class RecipeDetailListActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putString(SingleRecipeDetailFragment.ARG_ITEM_ID, holder.mItem.id);
-                        SingleRecipeDetailFragment fragment = new SingleRecipeDetailFragment();
+                        arguments.putString(RecipeShortDescriptionListDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        RecipeShortDescriptionListDetailFragment fragment = new RecipeShortDescriptionListDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.recipedetail_detail_container, fragment)
                                 .commit();
                     } else {
                         Context context = v.getContext();
-                        Intent intent = new Intent(context, SingleRecipeDetailActivity.class);
-                        intent.putExtra(SingleRecipeDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        Intent intent = new Intent(context, RecipeShortDescriptionListActivity.class);
+                        intent.putExtra(RecipeShortDescriptionListDetailFragment.ARG_ITEM_ID, holder.mItem.id);
 
                         context.startActivity(intent);
                     }

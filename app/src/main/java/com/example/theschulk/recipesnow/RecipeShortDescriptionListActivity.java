@@ -2,12 +2,8 @@ package com.example.theschulk.recipesnow;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
@@ -20,14 +16,14 @@ import com.example.theschulk.recipesnow.Models.RecipeModel;
  * item details are presented side-by-side with a list of items
  * in a {@link RecipeDetailListActivity}.
  */
-public class SingleRecipeDetailActivity extends AppCompatActivity {
+public class RecipeShortDescriptionListActivity extends AppCompatActivity {
 
     RecipeModel passedInRecipeModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe_detail);
+        setContentView(R.layout.activity_recipe_short_description_list);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -53,7 +49,7 @@ public class SingleRecipeDetailActivity extends AppCompatActivity {
             if (intentThatStartedTheActivity.hasExtra(getString(R.string.current_recipe_bundle))) {
                 passedInRecipeModel = (RecipeModel) intentThatStartedTheActivity.getSerializableExtra(getString(R.string.current_recipe_bundle));
 
-                Fragment RecipeStepFragment = SingleRecipeDetailFragment.newInstance(this, passedInRecipeModel);
+                Fragment RecipeStepFragment = RecipeShortDescriptionListDetailFragment.newInstance(this, passedInRecipeModel);
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction().
                         add(R.id.fl_step_detail_fragment, RecipeStepFragment, null).
@@ -61,9 +57,9 @@ public class SingleRecipeDetailActivity extends AppCompatActivity {
 
                 /*put this in onclickmethodinActivity
                 Bundle arguments = new Bundle();
-                arguments.putString(SingleRecipeDetailFragment.ARG_ITEM_ID,
-                        getIntent().getStringExtra(SingleRecipeDetailFragment.ARG_ITEM_ID));
-                SingleRecipeDetailFragment fragment = new SingleRecipeDetailFragment();
+                arguments.putString(RecipeShortDescriptionListDetailFragment.ARG_ITEM_ID,
+                        getIntent().getStringExtra(RecipeShortDescriptionListDetailFragment.ARG_ITEM_ID));
+                RecipeShortDescriptionListDetailFragment fragment = new RecipeShortDescriptionListDetailFragment();
                 fragment.setArguments(arguments);
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.recipedetail_detail_container, fragment)

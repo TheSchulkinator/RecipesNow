@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -12,7 +13,6 @@ import com.example.theschulk.recipesnow.Data.RetrofitUtils;
 import com.example.theschulk.recipesnow.Models.RecipeModel;
 import com.example.theschulk.recipesnow.RecyclerViewAdapters.RecipeListRecyclerViewAdapter;
 
-import java.io.Serializable;
 import java.util.List;
 
 import retrofit2.Call;
@@ -36,6 +36,10 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListR
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecipeRecyclerView.setAdapter(mRecipeViewAdapter);
         mRecipeRecyclerView.setLayoutManager(linearLayoutManager);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecipeRecyclerView.getContext(),
+                linearLayoutManager.getOrientation());
+        mRecipeRecyclerView.addItemDecoration(dividerItemDecoration);
 
         loadRecipes();
     }
@@ -72,7 +76,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListR
             singleOrTwoPainClass.putExtra("Selected Recipe", selectedRecipeModel);
             startActivity(singleOrTwoPainClass);
         }else {
-            destinationClass = SingleRecipeDetailActivity.class;
+            destinationClass = RecipeShortDescriptionListActivity.class;
             singleOrTwoPainClass = new Intent(context, destinationClass);
             singleOrTwoPainClass.putExtra("Selected Recipe", selectedRecipeModel);
             startActivity(singleOrTwoPainClass);
