@@ -6,6 +6,7 @@
     <!--Base URL for retrofit call-->
     <string name="base_url" translatable="false">https://d17h27t6h515a5.cloudfront.net/</string>
 
-    <!--String constants for bundles-->
+    <!--String constants for bundles and fragment keys-->
     <string name="current_recipe_bundle" translatable="false">Selected Recipe</string>
+    <string name="current_step_bundle" translatable="false">Selected Step</string>
 </resources>

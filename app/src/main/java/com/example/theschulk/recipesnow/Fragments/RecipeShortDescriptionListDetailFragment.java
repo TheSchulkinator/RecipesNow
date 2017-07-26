@@ -1,4 +1,4 @@
-package com.example.theschulk.recipesnow;
+package com.example.theschulk.recipesnow.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.theschulk.recipesnow.Models.RecipeModel;
+import com.example.theschulk.recipesnow.Models.StepModel;
+import com.example.theschulk.recipesnow.R;
+import com.example.theschulk.recipesnow.RecipeDetailListActivity;
+import com.example.theschulk.recipesnow.RecipeShortDescriptionListActivity;
 import com.example.theschulk.recipesnow.RecyclerViewAdapters.RecipeShortDescriptionListRecyclerViewAdapter;
 
 /**
@@ -19,7 +23,7 @@ import com.example.theschulk.recipesnow.RecyclerViewAdapters.RecipeShortDescript
  * in two-pane mode (on tablets) or a {@link RecipeShortDescriptionListActivity}
  * on handsets.
  */
-public class RecipeShortDescriptionListDetailFragment extends Fragment {
+public class RecipeShortDescriptionListDetailFragment extends Fragment implements RecipeShortDescriptionListRecyclerViewAdapter.RecipeDetailClickHandler{
 
     RecipeModel mCurrentRecipeModel;
     private RecyclerView mStepDescriptionListRecyclerView;
@@ -42,7 +46,6 @@ public class RecipeShortDescriptionListDetailFragment extends Fragment {
 
         if (getArguments().containsKey(getString(R.string.current_recipe_bundle))) {
             mCurrentRecipeModel = (RecipeModel) getArguments().getSerializable(getString(R.string.current_recipe_bundle));
-
         }
     }
 
@@ -52,7 +55,7 @@ public class RecipeShortDescriptionListDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.single_recipe_short_description_detail_fragment, container, false);
 
         if (mCurrentRecipeModel != null) {
-            mStepDescriptionListAdapter = new RecipeShortDescriptionListRecyclerViewAdapter();
+            mStepDescriptionListAdapter = new RecipeShortDescriptionListRecyclerViewAdapter(this);
             mStepDescriptionListRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_recipe_step_list);
             mStepDescriptionListRecyclerView.setAdapter(mStepDescriptionListAdapter);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getActivity());
@@ -65,5 +68,13 @@ public class RecipeShortDescriptionListDetailFragment extends Fragment {
         }
 
         return rootView;
+    }
+
+    @Override
+    public void onRecipeDetailClick(StepModel stepModel) {
+        Context context = getActivity();
+        Fragment recipeSingleStepInstructions = RecipeSingleStepInstructionsFragment.newInstance(context, stepModel);
+        RecipeShortDescriptionListActivity recipeShortDescriptionListActivity = (RecipeShortDescriptionListActivity) context;
+        recipeShortDescriptionListActivity.SwapFragment(recipeSingleStepInstructions);
     }
 }

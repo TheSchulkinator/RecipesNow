@@ -16,6 +16,16 @@ import java.util.List;
 public class RecipeShortDescriptionListRecyclerViewAdapter extends RecyclerView.Adapter<RecipeShortDescriptionListRecyclerViewAdapter.RecipeStepListViewHolder> {
 
     RecipeModel mCurrentRecipeModel;
+    StepModel mCurrentRecipeStepStepModel;
+    private RecipeDetailClickHandler mRecipeDetailClickHandler;
+
+    public RecipeShortDescriptionListRecyclerViewAdapter(RecipeDetailClickHandler recipeDetailClickHandler){
+        mRecipeDetailClickHandler = recipeDetailClickHandler;
+    }
+
+    public interface RecipeDetailClickHandler{
+        void onRecipeDetailClick(StepModel stepModel);
+    }
 
     @Override
     public RecipeStepListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -31,9 +41,9 @@ public class RecipeShortDescriptionListRecyclerViewAdapter extends RecyclerView.
     @Override
     public void onBindViewHolder(RecipeStepListViewHolder stepListViewHolder, int position) {
         List<StepModel> currentRecipeSteps = mCurrentRecipeModel.getSteps();
-        StepModel currentRecipeStepStepModel = currentRecipeSteps.get(position);
+        mCurrentRecipeStepStepModel = currentRecipeSteps.get(position);
 
-        stepListViewHolder.mRecipeStepList.setText(currentRecipeStepStepModel.getShortDescription());
+        stepListViewHolder.mRecipeStepList.setText(mCurrentRecipeStepStepModel.getShortDescription());
     }
 
     @Override
@@ -43,12 +53,18 @@ public class RecipeShortDescriptionListRecyclerViewAdapter extends RecyclerView.
         return recipeStepLength.size();
     }
 
-    public class RecipeStepListViewHolder extends RecyclerView.ViewHolder{
+    public class RecipeStepListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView mRecipeStepList;
 
         public RecipeStepListViewHolder(View view){
             super(view);
             mRecipeStepList = (TextView) view.findViewById(R.id.tv_recipe_step_list);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mRecipeDetailClickHandler.onRecipeDetailClick(mCurrentRecipeStepStepModel);
         }
     }
 

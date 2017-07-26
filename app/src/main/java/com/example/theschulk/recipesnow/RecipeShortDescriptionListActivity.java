@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
+import com.example.theschulk.recipesnow.Fragments.RecipeShortDescriptionListDetailFragment;
 import com.example.theschulk.recipesnow.Models.RecipeModel;
+import com.example.theschulk.recipesnow.RecyclerViewAdapters.RecipeShortDescriptionListRecyclerViewAdapter;
 
 /**
  * An activity representing a single RecipeDetail detail screen. This
@@ -16,7 +19,7 @@ import com.example.theschulk.recipesnow.Models.RecipeModel;
  * item details are presented side-by-side with a list of items
  * in a {@link RecipeDetailListActivity}.
  */
-public class RecipeShortDescriptionListActivity extends AppCompatActivity {
+public class RecipeShortDescriptionListActivity extends AppCompatActivity{
 
     RecipeModel passedInRecipeModel;
 
@@ -54,16 +57,6 @@ public class RecipeShortDescriptionListActivity extends AppCompatActivity {
                 fragmentManager.beginTransaction().
                         add(R.id.fl_step_detail_fragment, RecipeStepFragment, null).
                         commit();
-
-                /*put this in onclickmethodinActivity
-                Bundle arguments = new Bundle();
-                arguments.putString(RecipeShortDescriptionListDetailFragment.ARG_ITEM_ID,
-                        getIntent().getStringExtra(RecipeShortDescriptionListDetailFragment.ARG_ITEM_ID));
-                RecipeShortDescriptionListDetailFragment fragment = new RecipeShortDescriptionListDetailFragment();
-                fragment.setArguments(arguments);
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.recipedetail_detail_container, fragment)
-                        .commit();*/
             }
         }
     }
@@ -82,5 +75,12 @@ public class RecipeShortDescriptionListActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void SwapFragment(Fragment recipeSingleStepFragment){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fl_step_detail_fragment, recipeSingleStepFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
