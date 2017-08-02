@@ -19,17 +19,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecipeDetailListActivity"
-            android:label="@string/title_recipedetail_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".RecipeShortDescriptionListActivity"
+            android:name=".RecipeDescriptionListActivity"
             android:label="@string/title_recipedetail_detail"
-            android:parentActivityName=".RecipeDetailListActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.theschulk.recipesnow.RecipeDetailListActivity" />
         </activity>
     </application>
 

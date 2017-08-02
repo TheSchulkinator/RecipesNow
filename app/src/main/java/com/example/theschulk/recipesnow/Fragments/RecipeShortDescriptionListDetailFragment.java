@@ -13,16 +13,9 @@ import android.view.ViewGroup;
 import com.example.theschulk.recipesnow.Models.RecipeModel;
 import com.example.theschulk.recipesnow.Models.StepModel;
 import com.example.theschulk.recipesnow.R;
-import com.example.theschulk.recipesnow.RecipeDetailListActivity;
-import com.example.theschulk.recipesnow.RecipeShortDescriptionListActivity;
+import com.example.theschulk.recipesnow.RecipeDescriptionListActivity;
 import com.example.theschulk.recipesnow.RecyclerViewAdapters.RecipeShortDescriptionListRecyclerViewAdapter;
 
-/**
- * A fragment representing a single RecipeDetail detail screen.
- * This fragment is either contained in a {@link RecipeDetailListActivity}
- * in two-pane mode (on tablets) or a {@link RecipeShortDescriptionListActivity}
- * on handsets.
- */
 public class RecipeShortDescriptionListDetailFragment extends Fragment implements RecipeShortDescriptionListRecyclerViewAdapter.RecipeDetailClickHandler{
 
     RecipeModel mCurrentRecipeModel;
@@ -74,7 +67,7 @@ public class RecipeShortDescriptionListDetailFragment extends Fragment implement
     public void onRecipeDetailClick(StepModel stepModel) {
         Context context = getActivity();
         Fragment recipeSingleStepInstructions = RecipeSingleStepInstructionsFragment.newInstance(context, stepModel);
-        RecipeShortDescriptionListActivity recipeShortDescriptionListActivity = (RecipeShortDescriptionListActivity) context;
+        RecipeDescriptionListActivity recipeShortDescriptionListActivity = (RecipeDescriptionListActivity) context;
         recipeShortDescriptionListActivity.SwapFragment(recipeSingleStepInstructions);
     }
 }

@@ -77,6 +77,7 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
         mSimpleExoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
         mSimpleExoPlayerView.setPlayer(mSimpleExoPlayer);
 
+        //Todo add null check for url and change display accordingly
         String recipeVideoUrl = mCurrentStepModel.getVideoURL();
         Uri recipeVideoUri = Uri.parse(recipeVideoUrl).buildUpon().build();
 
@@ -86,5 +87,11 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
         mSimpleExoPlayer.setPlayWhenReady(true);
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mSimpleExoPlayer.stop();
+        mSimpleExoPlayer.release();
+        mSimpleExoPlayer = null;
+    }
 }

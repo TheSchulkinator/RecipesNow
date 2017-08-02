@@ -62,24 +62,10 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListR
 
     @Override
     public void onClick(RecipeModel selectedRecipeModel) {
-        //implement navigation to activity with the fragments for the recipeDetail
-        if (findViewById(R.id.recipedetail_detail_container) != null)
-        {mTwoPane = true;}
-        else {mTwoPane = false;}
         Context context = this;
-        Class destinationClass;
-        Intent singleOrTwoPainClass;
-
-        if(mTwoPane){
-            destinationClass = RecipeDetailListActivity.class;
-            singleOrTwoPainClass = new Intent(context, destinationClass);
-            singleOrTwoPainClass.putExtra("Selected Recipe", selectedRecipeModel);
-            startActivity(singleOrTwoPainClass);
-        }else {
-            destinationClass = RecipeShortDescriptionListActivity.class;
-            singleOrTwoPainClass = new Intent(context, destinationClass);
-            singleOrTwoPainClass.putExtra("Selected Recipe", selectedRecipeModel);
-            startActivity(singleOrTwoPainClass);
-        }
+        Class destinationClass = RecipeDescriptionListActivity.class;
+        Intent passedInIntent = new Intent(context, destinationClass);
+        passedInIntent.putExtra("Selected Recipe", selectedRecipeModel);
+        startActivity(passedInIntent);
     }
 }

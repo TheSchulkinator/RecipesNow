@@ -64,6 +64,9 @@ public class RecipeShortDescriptionListRecyclerViewAdapter extends RecyclerView.
 
         @Override
         public void onClick(View v) {
+            int position = getAdapterPosition();
+            List<StepModel> currentRecipeSteps = mCurrentRecipeModel.getSteps();
+            mCurrentRecipeStepStepModel = currentRecipeSteps.get(position);
             mRecipeDetailClickHandler.onRecipeDetailClick(mCurrentRecipeStepStepModel);
         }
     }
