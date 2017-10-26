@@ -20,7 +20,8 @@ import com.example.theschulk.recipesnow.RecyclerViewAdapters.RecipeShortDescript
 
 import java.util.List;
 
-public class RecipeDescriptionListActivity extends AppCompatActivity implements RecipeShortDescriptionListRecyclerViewAdapter.RecipeDetailClickHandler{
+public class
+RecipeDescriptionListActivity extends AppCompatActivity implements RecipeShortDescriptionListRecyclerViewAdapter.RecipeDetailClickHandler{
 
     RecipeModel passedInRecipeModel;
     Boolean mTwoPane;

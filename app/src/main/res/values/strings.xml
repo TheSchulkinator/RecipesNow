@@ -2,6 +2,7 @@
     <string name="app_name">Recipes Now</string>
     <string name="title_recipedetail_list">RecipeDetails</string>
     <string name="title_recipedetail_detail">RecipeDetail Detail</string>
+    <string name="ingredient_list">Ingredient List:</string>
 
     <!--Base URL for retrofit call-->
     <string name="base_url" translatable="false">https://d17h27t6h515a5.cloudfront.net/</string>
@@ -9,4 +10,10 @@
     <!--String constants for bundles and fragment keys-->
     <string name="current_recipe_bundle" translatable="false">Selected Recipe</string>
     <string name="current_step_bundle" translatable="false">Selected Step</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+
+    <!--Key for shared preference-->
+    <string name="widget_ingredient_key" translatable="false">widgetIngredientRecipe</string>
+    <string name="widget_quantity_key" translatable="false">widgetQuantityRecipe</string>
 </resources>

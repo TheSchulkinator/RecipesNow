@@ -9,18 +9,28 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.theschulk.recipesnow.Models.IngredientModel;
 import com.example.theschulk.recipesnow.Models.RecipeModel;
 import com.example.theschulk.recipesnow.Models.StepModel;
 import com.example.theschulk.recipesnow.R;
 import com.example.theschulk.recipesnow.RecipeDescriptionListActivity;
 import com.example.theschulk.recipesnow.RecyclerViewAdapters.RecipeShortDescriptionListRecyclerViewAdapter;
+import com.example.theschulk.recipesnow.Utilities.RecipeIngredientBuilder;
+
+import java.util.List;
 
 public class RecipeShortDescriptionListDetailFragment extends Fragment implements RecipeShortDescriptionListRecyclerViewAdapter.RecipeDetailClickHandler{
 
     RecipeModel mCurrentRecipeModel;
+    List<IngredientModel> ingredientModelList;
     private RecyclerView mStepDescriptionListRecyclerView;
     private RecipeShortDescriptionListRecyclerViewAdapter mStepDescriptionListAdapter;
+    private TextView mIngredientList;
+    private TextView mQuantityList;
+    private TextView mIngredientTitle;
+    private TextView mRecipeTilte;
 
     public RecipeShortDescriptionListDetailFragment() {
     }
@@ -48,6 +58,17 @@ public class RecipeShortDescriptionListDetailFragment extends Fragment implement
         View rootView = inflater.inflate(R.layout.single_recipe_short_description_detail_fragment, container, false);
 
         if (mCurrentRecipeModel != null) {
+            mRecipeTilte = (TextView) rootView.findViewById(R.id.tv_current_recipe_title);
+            mIngredientTitle = (TextView) rootView.findViewById(R.id.tv_ingredient_list_title);
+            mQuantityList = (TextView) rootView.findViewById(R.id.tv_quanity);
+            mIngredientList = (TextView) rootView.findViewById(R.id.tv_ingredients);
+            ingredientModelList = mCurrentRecipeModel.getIngredients();
+            String ingredientList = RecipeIngredientBuilder.IngredientListIngredientBuilder(ingredientModelList);
+            String ingredientQuantity = RecipeIngredientBuilder.IngredientListQuantityBuilder(ingredientModelList);
+            mQuantityList.setText(ingredientQuantity);
+            mIngredientList.setText(ingredientList);
+            mRecipeTilte.setText(mCurrentRecipeModel.getName());
+
             mStepDescriptionListAdapter = new RecipeShortDescriptionListRecyclerViewAdapter(this);
             mStepDescriptionListRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_recipe_step_list);
             mStepDescriptionListRecyclerView.setAdapter(mStepDescriptionListAdapter);
@@ -58,6 +79,7 @@ public class RecipeShortDescriptionListDetailFragment extends Fragment implement
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mStepDescriptionListRecyclerView.getContext(),
                     linearLayoutManager.getOrientation());
             mStepDescriptionListRecyclerView.addItemDecoration(dividerItemDecoration);
+
         }
 
         return rootView;

@@ -19,8 +19,9 @@
 
     <style name="RecyclerViewTextView">
         <item name="android:padding">30dp</item>
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>

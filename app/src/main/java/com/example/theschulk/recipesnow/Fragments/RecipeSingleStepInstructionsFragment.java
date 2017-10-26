@@ -68,6 +68,8 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
 
     private void InitializeExoPlayer(){
         Context context = getActivity();
+        String recipeVideoUrl = mCurrentStepModel.getVideoURL();
+        if(recipeVideoUrl != null && recipeVideoUrl!= "") {
         BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
         TrackSelection.Factory videoTrackSelectionFactory =
                 new AdaptiveTrackSelection.Factory(bandwidthMeter);
@@ -77,14 +79,13 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
         mSimpleExoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
         mSimpleExoPlayerView.setPlayer(mSimpleExoPlayer);
 
-        //Todo add null check for url and change display accordingly
-        String recipeVideoUrl = mCurrentStepModel.getVideoURL();
-        Uri recipeVideoUri = Uri.parse(recipeVideoUrl).buildUpon().build();
+            Uri recipeVideoUri = Uri.parse(recipeVideoUrl).buildUpon().build();
 
-        MediaSource mediaSource = new ExtractorMediaSource(recipeVideoUri, new DefaultDataSourceFactory(context, Util.getUserAgent(context, "RecipesNow")),
-                new DefaultExtractorsFactory(), null, null);
-        mSimpleExoPlayer.prepare(mediaSource);
-        mSimpleExoPlayer.setPlayWhenReady(true);
+            MediaSource mediaSource = new ExtractorMediaSource(recipeVideoUri, new DefaultDataSourceFactory(context, Util.getUserAgent(context, "RecipesNow")),
+                    new DefaultExtractorsFactory(), null, null);
+            mSimpleExoPlayer.prepare(mediaSource);
+            mSimpleExoPlayer.setPlayWhenReady(true);
+        }
     }
 
     @Override
