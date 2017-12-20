@@ -11,7 +11,7 @@ public class widgetListViewAdapter extends BaseAdapter {
         return 0;
     }
 
-    //check
+    //chec
 
     @Override
     public Object getItem(int position) {
