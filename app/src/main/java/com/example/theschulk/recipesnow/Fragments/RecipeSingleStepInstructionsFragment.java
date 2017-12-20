@@ -34,6 +34,7 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
     TextView mLongDescriptionTextView;
     SimpleExoPlayerView mSimpleExoPlayerView;
     SimpleExoPlayer mSimpleExoPlayer;
+    private String recipeVideoUrl;
 
     public static RecipeSingleStepInstructionsFragment newInstance (Context context, StepModel currentStep){
         RecipeSingleStepInstructionsFragment recipeSingleStepInstructionsFragment = new RecipeSingleStepInstructionsFragment();
@@ -57,18 +58,21 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.recipe_single_step_instructions_fragment, container, false);
 
-        mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.exo_recipe_video);
         mLongDescriptionTextView = (TextView) rootView.findViewById(R.id.tv_long_description);
 
-        InitializeExoPlayer();
-        mLongDescriptionTextView.setText(mCurrentStepModel.getDescription());
+        recipeVideoUrl = mCurrentStepModel.getVideoURL();
+        if(recipeVideoUrl != null && recipeVideoUrl!= "") {
+            mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.exo_recipe_video);
+            InitializeExoPlayer();
+            mLongDescriptionTextView.setText(mCurrentStepModel.getDescription());
+        }
 
         return rootView;
     }
 
     private void InitializeExoPlayer(){
         Context context = getActivity();
-        String recipeVideoUrl = mCurrentStepModel.getVideoURL();
+        recipeVideoUrl = mCurrentStepModel.getVideoURL();
         if(recipeVideoUrl != null && recipeVideoUrl!= "") {
         BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
         TrackSelection.Factory videoTrackSelectionFactory =
@@ -91,8 +95,11 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mSimpleExoPlayer.stop();
-        mSimpleExoPlayer.release();
-        mSimpleExoPlayer = null;
+
+        if(recipeVideoUrl != null && recipeVideoUrl!= "") {
+            mSimpleExoPlayer.stop();
+            mSimpleExoPlayer.release();
+            mSimpleExoPlayer = null;
+        }
     }
 }

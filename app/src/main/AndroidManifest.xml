@@ -20,8 +20,7 @@
         </activity>
         <activity
             android:name=".RecipeDescriptionListActivity"
-            android:label="@string/title_recipedetail_detail"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_recipedetail_detail"></activity>
 
         <receiver android:name=".RecipeIngredientListWidget">
             <intent-filter>
