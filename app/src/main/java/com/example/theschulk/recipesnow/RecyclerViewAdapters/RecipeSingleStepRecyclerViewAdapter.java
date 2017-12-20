@@ -35,7 +35,6 @@ public class RecipeSingleStepRecyclerViewAdapter extends RecyclerView.Adapter<Re
 
         public RecipeStepViewHolder(View view){
             super(view);
-            singleRecipeStep = (TextView) view.findViewById(R.id.tv_fragment_single_recipe_step);
         }
     }
 }

@@ -3,6 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_current_recipe_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:layout_marginLeft="8dp"
+        android:text="test"
+        android:layout_marginTop="0dp" />
+
+    <!-- add a FrameLayout to try-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fl_recipe_ingredient"/>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

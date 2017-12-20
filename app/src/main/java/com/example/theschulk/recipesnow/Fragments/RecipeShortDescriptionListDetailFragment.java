@@ -7,20 +7,32 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.theschulk.recipesnow.Models.IngredientModel;
 import com.example.theschulk.recipesnow.Models.RecipeModel;
 import com.example.theschulk.recipesnow.Models.StepModel;
 import com.example.theschulk.recipesnow.R;
 import com.example.theschulk.recipesnow.RecipeDescriptionListActivity;
 import com.example.theschulk.recipesnow.RecyclerViewAdapters.RecipeShortDescriptionListRecyclerViewAdapter;
+import com.example.theschulk.recipesnow.Utilities.RecipeIngredientBuilder;
+
+import java.util.List;
 
 public class RecipeShortDescriptionListDetailFragment extends Fragment implements RecipeShortDescriptionListRecyclerViewAdapter.RecipeDetailClickHandler{
 
     RecipeModel mCurrentRecipeModel;
+    List<IngredientModel> ingredientModelList;
     private RecyclerView mStepDescriptionListRecyclerView;
     private RecipeShortDescriptionListRecyclerViewAdapter mStepDescriptionListAdapter;
+    private TextView mIngredientList;
+    private TextView mQuantityList;
+    private TextView mIngredientTitle;
+    private TextView mRecipeTitle;
 
     public RecipeShortDescriptionListDetailFragment() {
     }
@@ -40,6 +52,7 @@ public class RecipeShortDescriptionListDetailFragment extends Fragment implement
         if (getArguments().containsKey(getString(R.string.current_recipe_bundle))) {
             mCurrentRecipeModel = (RecipeModel) getArguments().getSerializable(getString(R.string.current_recipe_bundle));
         }
+
     }
 
     @Override
@@ -48,6 +61,8 @@ public class RecipeShortDescriptionListDetailFragment extends Fragment implement
         View rootView = inflater.inflate(R.layout.single_recipe_short_description_detail_fragment, container, false);
 
         if (mCurrentRecipeModel != null) {
+            mRecipeTitle = (TextView) rootView.findViewById(R.id.tv_current_recipe_title);
+
             mStepDescriptionListAdapter = new RecipeShortDescriptionListRecyclerViewAdapter(this);
             mStepDescriptionListRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_recipe_step_list);
             mStepDescriptionListRecyclerView.setAdapter(mStepDescriptionListAdapter);
@@ -58,10 +73,12 @@ public class RecipeShortDescriptionListDetailFragment extends Fragment implement
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mStepDescriptionListRecyclerView.getContext(),
                     linearLayoutManager.getOrientation());
             mStepDescriptionListRecyclerView.addItemDecoration(dividerItemDecoration);
+
         }
 
         return rootView;
     }
+
 
     @Override
     public void onRecipeDetailClick(StepModel stepModel) {
@@ -70,4 +87,5 @@ public class RecipeShortDescriptionListDetailFragment extends Fragment implement
         RecipeDescriptionListActivity recipeShortDescriptionListActivity = (RecipeDescriptionListActivity) context;
         recipeShortDescriptionListActivity.SwapFragment(recipeSingleStepInstructions);
     }
+
 }
