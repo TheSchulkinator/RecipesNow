@@ -3,44 +3,35 @@ package com.example.theschulk.recipesnow;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.preference.PreferenceManager;
-import android.widget.ListView;
+import android.content.Intent;
+import android.net.Uri;
 import android.widget.RemoteViews;
+import com.example.theschulk.recipesnow.Utilities.RecipeWidgetService;
 
-import com.example.theschulk.recipesnow.Database.IngredientDbHelper;
-import com.example.theschulk.recipesnow.RecyclerViewAdapters.WidgetCursorAdapter;
-
-/**
- * Implementation of App Widget functionality.
- */
 public class RecipeIngredientListWidget extends AppWidgetProvider {
+
+    static private RemoteViews updateWidgetListView(Context context,
+                                             int appWidgetId) {
+
+        RemoteViews remoteViews = new RemoteViews(
+                context.getPackageName(),R.layout.recipe_ingredient_list_widget);
+
+        Intent svcIntent = new Intent(context, RecipeWidgetService.class);
+        svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        svcIntent.setData(Uri.parse(
+                svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
+        remoteViews.setRemoteAdapter(R.id.widget_list, svcIntent);
+        return remoteViews;
+    }
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        //setup database connection
-        IngredientDbHelper handler = new IngredientDbHelper(context);
-        SQLiteDatabase db = handler.getWritableDatabase();
-        Cursor widgetCursor = db.rawQuery("SELECT  * FROM ingredients", null);
+        RemoteViews views = updateWidgetListView(context,
+                appWidgetId);
 
-        ListView lView = (ListView)  findViewById()
-        WidgetCursorAdapter widgetAdapter = new WidgetCursorAdapter(context, widgetCursor);
-
-        //SharedPreferences sharedPref = context.getPreferences(context);
-        //String ingredientListText = PreferenceManager.getDefaultSharedPreferences(context).
-               // getString((context.getString(R.string.widget_ingredient_key)), "Select Recipe In Application!");
-                // sharedPref.getString(getString(R.string.widget_ingredient_key), "Select Recipe In Application!")
-
-        // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_ingredient_list_widget);
-        
-        //views.setTextViewText(R.id.appwidget_text, ingredientListText);
-
-        // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
+
     }
 
     @Override
@@ -53,7 +44,6 @@ public class RecipeIngredientListWidget extends AppWidgetProvider {
 
     @Override
     public void onEnabled(Context context) {
-        // Enter relevant functionality for when the first widget is created
     }
 
     @Override

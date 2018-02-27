@@ -66,7 +66,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListR
                 mRecipeViewAdapter.setRecipeListIntoRecyclerView(currentRecipes);
 
                 Boolean dbRecord = isRecipeSaved();
-                if(dbRecord){
+                if(!dbRecord){
                     saveIngredientToDb(currentRecipes);
                 }
             }

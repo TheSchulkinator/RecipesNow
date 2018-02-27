@@ -31,6 +31,14 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/recipe_ingredient_list_widget_info" />
         </receiver>
+
+        <service android:name="com.example.theschulk.recipesnow.Utilities.RecipeWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:exported="false" />
+
+        <provider android:name="com.example.theschulk.recipesnow.Utilities.IngredientDataProvider"
+            android:authorities="com.example.theschulk.ingredientlistwidget.provider"
+            android:exported="true"/>
     </application>
 
 </manifest>
