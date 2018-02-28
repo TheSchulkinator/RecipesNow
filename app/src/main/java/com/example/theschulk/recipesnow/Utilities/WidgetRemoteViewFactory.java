@@ -3,6 +3,7 @@ package com.example.theschulk.recipesnow.Utilities;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.util.Log;
 import android.widget.RemoteViews;
@@ -21,6 +22,7 @@ public class WidgetRemoteViewFactory implements RemoteViewsService.RemoteViewsFa
     private Context mContext = null;
     private int mAppWidgetId;
     private Cursor mCursor;
+
 
     public WidgetRemoteViewFactory(Context context, Intent intent){
         this.mContext = context;
@@ -57,21 +59,24 @@ public class WidgetRemoteViewFactory implements RemoteViewsService.RemoteViewsFa
     @Override
     public RemoteViews getViewAt(int position) {
         //Get strings to display in layout
+        String recipeTitle = "";
         String ingredient ="";
         String quantity = "";
 
         if(mCursor.moveToPosition(position)){
             final int ingredientColumnIndex = mCursor.getColumnIndex(IngredientContract.IngredientEntry.COLUMN_NAME_INGREDIENT);
             final int quantityColumnIndex = mCursor.getColumnIndex(IngredientContract.IngredientEntry.COLUMN_NAME_QUANTITY);
+            final int titleColumnIndex = mCursor.getColumnIndex(IngredientContract.IngredientEntry.COLUMN_NAME_RECIPE);
 
             ingredient = mCursor.getString(ingredientColumnIndex);
             quantity = mCursor.getString(quantityColumnIndex);
+            recipeTitle = mCursor.getString(titleColumnIndex);
         }
 
-        RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_text_views);
+            RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_text_views);
 
-        views.setTextViewText(R.id.widget_tv_ingredient, ingredient);
-        views.setTextViewText(R.id.widget_tv_ingredient_quantity, quantity);
+            views.setTextViewText(R.id.widget_tv_ingredient, ingredient);
+            views.setTextViewText(R.id.widget_tv_ingredient_quantity, quantity);
 
         return views;
     }

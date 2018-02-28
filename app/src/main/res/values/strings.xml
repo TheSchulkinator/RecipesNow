@@ -14,7 +14,6 @@
     <string name="add_widget">Add widget</string>
 
     <!--Key for shared preference-->
-    <string name="widget_ingredient_key" translatable="false">widgetIngredientRecipe</string>
-    <string name="widget_quantity_key" translatable="false">widgetQuantityRecipe</string>
+    <string name="widget_title_key" translatable="false">widgetRecipeTitle</string>
     <string name="shared_preference_key" translatable="false">com.example.theschulk.recipesnow.sp_key</string>
 </resources>

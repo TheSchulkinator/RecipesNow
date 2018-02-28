@@ -18,8 +18,7 @@ public class RecipeIngredientListWidget extends AppWidgetProvider {
 
         Intent svcIntent = new Intent(context, RecipeWidgetService.class);
         svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        svcIntent.setData(Uri.parse(
-                svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
+        svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
         remoteViews.setRemoteAdapter(R.id.widget_list, svcIntent);
         return remoteViews;
     }
