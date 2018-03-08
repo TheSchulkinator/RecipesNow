@@ -1,14 +1,19 @@
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#09C"
-    android:padding="@dimen/widget_margin"
-    >
-    
+    android:orientation="vertical"
+    android:padding="@dimen/widget_margin">
+
+    <Button
+        android:id="@+id/widget_back_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Back" />
+
     <ListView
         android:id="@+id/widget_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

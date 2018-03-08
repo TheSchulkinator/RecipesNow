@@ -25,6 +25,11 @@
         <receiver android:name=".RecipeIngredientListWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.example.theschulk.recipesnow.NUTELLA_BUTTON" />
+                <action android:name="com.example.theschulk.recipesnow.BROWNIE_BUTTON" />
+                <action android:name="com.example.theschulk.recipesnow.YELLOW_CAKE_BUTTON" />
+                <action android:name="com.example.theschulk.recipesnow.CHEESECAKE_BUTTON" />
+                <action android:name="com.example.theschulk.recipesnow.WIDGET_BACK_BUTTON" />
             </intent-filter>
 
             <meta-data
