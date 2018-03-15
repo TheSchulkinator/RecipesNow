@@ -14,51 +14,23 @@ import com.example.theschulk.recipesnow.Utilities.RecipeWidgetService;
 public class RecipeIngredientListWidget extends AppWidgetProvider {
 
     static private RemoteViews updateWidgetListView(Context context, int appWidgetId, AppWidgetManager appWidgetManager) {
-        RemoteViews remoteViews;
-        /*PendingIntent nutellaButtonPendingIntent = setPendingIntent(context.getString(R.string.nutella_action_button), context, appWidgetId);
-        PendingIntent brownieButtonPendingIntent = setPendingIntent(context.getString(R.string.brownie_action_button), context, appWidgetId);
-        PendingIntent yellowCakeButtonPendingIntent = setPendingIntent(context.getString(R.string.yellow_cake_action_button), context, appWidgetId);
-        PendingIntent cheesecakeButtonPendingIntent = setPendingIntent(context.getString(R.string.cheesecake_action_button), context, appWidgetId);
 
-        //set up shared preference to store current view
+        //Shared Preferences set up to retrieve title
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.widget_view_key),Context.MODE_PRIVATE);
+        String widgetView = sharedPreferences.getString(context.getString(R.string.widget_view_key), context.getString(R.string.nutella_value));
 
-        //retrieve sharedpreference key stored value in order to determine what view to use
-        String widgetView = sharedPreferences.getString(context.getString(R.string.widget_view_key), "");
-
-        //TODO: add pending intent for each button and handle on receive
-        //read shared preference to see what display should be displayed
-        if(widgetView.equals("") || widgetView.equals(context.getString(R.string.button_widget_key))){
-
-            remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_recipe_button_layout);
-            remoteViews.setOnClickPendingIntent(R.id.nutella_button, nutellaButtonPendingIntent);
-            remoteViews.setOnClickPendingIntent(R.id.brownie_button, brownieButtonPendingIntent);
-            remoteViews.setOnClickPendingIntent(R.id.yellow_cake_button, yellowCakeButtonPendingIntent);
-            remoteViews.setOnClickPendingIntent(R.id.cheesecake_button, cheesecakeButtonPendingIntent);
-        } else {
-            PendingIntent widgetBackButtonPendingIntent = setPendingIntent(context.getString(R.string.widget_back_action_button), context, appWidgetId);
-
-            remoteViews = new RemoteViews(context.getPackageName(), R.layout.recipe_ingredient_list_widget);
-
-            Intent svcIntent = new Intent(context, RecipeWidgetService.class);
-            svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-            svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
-            remoteViews.setRemoteAdapter(R.id.widget_list, svcIntent);
-            //appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_list);
-            remoteViews.setOnClickPendingIntent(R.id.widget_back_button, widgetBackButtonPendingIntent);
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_list);
-        }*/
-
+        //Set Pending Intent for button
         PendingIntent widgetBackButtonPendingIntent = setPendingIntent(context.getString(R.string.widget_back_action_button), context, appWidgetId);
 
-         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.recipe_ingredient_list_widget);
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.recipe_ingredient_list_widget);
 
         Intent svcIntent = new Intent(context, RecipeWidgetService.class);
         svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
+
+        remoteViews.setTextViewText(R.id.widget_recipe_title, widgetView);
         remoteViews.setRemoteAdapter(R.id.widget_list, svcIntent);
-        remoteViews.setOnClickPendingIntent(R.id.widget_back_button, widgetBackButtonPendingIntent);
-        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_list);
+        remoteViews.setOnClickPendingIntent(R.id.widget_advance_button, widgetBackButtonPendingIntent);
 
         return remoteViews;
     }
@@ -90,7 +62,7 @@ public class RecipeIngredientListWidget extends AppWidgetProvider {
                 this.getClass()));
 
 
-
+        //When button is pressed advance to the next list
         if(context.getString(R.string.widget_back_action_button).equals(intent.getAction())) {
 
             if(widgetView.equals(context.getString(R.string.nutella_value))){
@@ -110,42 +82,6 @@ public class RecipeIngredientListWidget extends AppWidgetProvider {
             mAppWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_list);
             onUpdate(context, mAppWidgetManager, appWidgetIds);
         }
-            // updateAppWidget(context, mAppWidgetManager, appWidgetId);
-        //mAppWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_list);
-
-        /*if(context.getString(R.string.nutella_action_button).equals(intent.getAction())){
-            editor.putString(context.getString(R.string.widget_view_key), context.getString(R.string.nutella_value));
-            editor.commit();
-            mAppWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_list);
-            //updateAppWidget(context, mAppWidgetManager, appWidgetId);
-            onUpdate(context, mAppWidgetManager, appWidgetIds);
-        } else if(context.getString(R.string.brownie_action_button).equals(intent.getAction())){
-            editor.putString(context.getString(R.string.widget_view_key), context.getString(R.string.brownie_value));
-            editor.commit();
-            mAppWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_list);
-           // updateAppWidget(context, mAppWidgetManager, appWidgetId);
-            onUpdate(context, mAppWidgetManager, appWidgetIds);
-        }else if(context.getString(R.string.yellow_cake_action_button).equals(intent.getAction())){
-            editor.putString(context.getString(R.string.widget_view_key), context.getString(R.string.yellow_cake_value));
-            editor.commit();
-            mAppWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_list);
-           // updateAppWidget(context, mAppWidgetManager, appWidgetId);
-            onUpdate(context, mAppWidgetManager, appWidgetIds);
-        } else if(context.getString(R.string.cheesecake_action_button).equals(intent.getAction())){
-            editor.putString(context.getString(R.string.widget_view_key), context.getString(R.string.cheesecake_value));
-            editor.commit();
-            mAppWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_list);
-            onUpdate(context, mAppWidgetManager, appWidgetIds);
-           // updateAppWidget(context, mAppWidgetManager, appWidgetId);
-        } else if(context.getString(R.string.widget_back_action_button).equals(intent.getAction())){
-            editor.putString(context.getString(R.string.widget_view_key), context.getString(R.string.button_widget_key));
-            editor.commit();
-            mAppWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_list);
-            onUpdate(context, mAppWidgetManager, appWidgetIds);
-           // updateAppWidget(context, mAppWidgetManager, appWidgetId);
-        } else {
-            super.onReceive(context, intent);
-        }*/
 
     }
 

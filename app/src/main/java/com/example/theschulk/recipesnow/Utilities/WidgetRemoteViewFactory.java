@@ -46,12 +46,6 @@ public class WidgetRemoteViewFactory implements RemoteViewsService.RemoteViewsFa
         mCursor = mContext.getContentResolver().query(IngredientDataProvider.CONTENT_URI, null, widgetView,
                 widgetSelectionArgs, null);
 
-      // if(!widgetView.equals(mContext.getString(R.string.button_widget_key))) {
-
-        // } else {
-          /// mCursor = mContext.getContentResolver().query(IngredientDataProvider.CONTENT_URI, null, null,
-                   //null, null);
-      // }
     }
 
     @Override
