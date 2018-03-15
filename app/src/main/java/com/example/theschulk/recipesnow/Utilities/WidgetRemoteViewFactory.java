@@ -31,17 +31,27 @@ public class WidgetRemoteViewFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onCreate() {
-
     }
 
     @Override
     public void onDataSetChanged() {
-        if (mCursor != null) {
-            mCursor.close();
-        }
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(
+                mContext.getString(R.string.widget_view_key),Context.MODE_PRIVATE);
 
-        mCursor = mContext.getContentResolver().query(IngredientDataProvider.CONTENT_URI, null, null,
-                null, null);
+        //retrieve sharedpreference key stored value in order to determine what view to use
+        String widgetView = sharedPreferences.getString(mContext.getString(R.string.widget_view_key), "");
+
+
+        String[] widgetSelectionArgs = {widgetView};
+        mCursor = mContext.getContentResolver().query(IngredientDataProvider.CONTENT_URI, null, widgetView,
+                widgetSelectionArgs, null);
+
+      // if(!widgetView.equals(mContext.getString(R.string.button_widget_key))) {
+
+        // } else {
+          /// mCursor = mContext.getContentResolver().query(IngredientDataProvider.CONTENT_URI, null, null,
+                   //null, null);
+      // }
     }
 
     @Override
@@ -58,10 +68,15 @@ public class WidgetRemoteViewFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public RemoteViews getViewAt(int position) {
+
         //Get strings to display in layout
         String recipeTitle = "";
         String ingredient ="";
         String quantity = "";
+        if(mCursor == null) {
+            RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_recipe_button_layout);
+            return views;
+        }
 
         if(mCursor.moveToPosition(position)){
             final int ingredientColumnIndex = mCursor.getColumnIndex(IngredientContract.IngredientEntry.COLUMN_NAME_INGREDIENT);

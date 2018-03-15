@@ -27,11 +27,21 @@ public class IngredientDataProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(@NonNull Uri uri, @Nullable String[] strings, @Nullable String s, @Nullable String[] strings1, @Nullable String s1) {
+    public Cursor query(@NonNull Uri uri, @Nullable String[] strings, @Nullable String selection, @Nullable String[] widgetSelectionArgs, @Nullable String s1) {
         String selectQuery = "SELECT  * FROM " + IngredientContract.IngredientEntry.TABLE_NAME;
 
         db = mDBHelper.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        Cursor cursor = db.query(
+                IngredientContract.IngredientEntry.TABLE_NAME,
+                null,
+                IngredientContract.IngredientEntry.COLUMN_NAME_RECIPE + "=?",
+                widgetSelectionArgs,
+                null,
+                null,
+                null
+        );
+        //Cursor cursor = db.rawQuery(selectQuery, null);
         return cursor;
     }
 

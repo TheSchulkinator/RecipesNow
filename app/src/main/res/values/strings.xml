@@ -16,10 +16,10 @@
     <!--Key for shared preference-->
     <string name="widget_view_key" translatable="false">widgetViewKey</string>
     <string name="button_widget_key" translatable="false">buttonViewKey</string>
-    <string name="nutella_value" translatable="false">NutellaValue</string>
-    <string name="brownie_value" translatable="false">BrownieValue</string>
-    <string name="yellow_cake_value" translatable="false">YellowCakeValue</string>
-    <string name="cheesecake_value" translatable="false">CheeseCakeValue</string>
+    <string name="nutella_value" translatable="false">Nutella Pie</string>
+    <string name="brownie_value" translatable="false">Brownies</string>
+    <string name="yellow_cake_value" translatable="false">Yellow Cake</string>
+    <string name="cheesecake_value" translatable="false">Cheesecake</string>
     <string name="shared_preference_key" translatable="false">com.example.theschulk.recipesnow.sp_key</string>
 
     <!--Action path Name-->

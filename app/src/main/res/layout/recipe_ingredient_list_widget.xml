@@ -6,10 +6,10 @@
     android:padding="@dimen/widget_margin">
 
     <Button
-        android:id="@+id/widget_back_button"
+        android:id="@+id/widget_advance_button"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="Back" />
+        android:text="Next Ingredient List" />
 
     <ListView
         android:id="@+id/widget_list"
