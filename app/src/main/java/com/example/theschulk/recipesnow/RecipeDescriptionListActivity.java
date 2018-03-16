@@ -1,11 +1,7 @@
 package com.example.theschulk.recipesnow;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,22 +10,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.theschulk.recipesnow.Fragments.RecipeShortDescriptionListDetailFragment;
 import com.example.theschulk.recipesnow.Fragments.RecipeSingleStepInstructionsFragment;
-import com.example.theschulk.recipesnow.Models.IngredientModel;
 import com.example.theschulk.recipesnow.Models.RecipeModel;
 import com.example.theschulk.recipesnow.Models.StepModel;
 import com.example.theschulk.recipesnow.RecyclerViewAdapters.RecipeShortDescriptionListRecyclerViewAdapter;
-import com.example.theschulk.recipesnow.Utilities.RecipeIngredientBuilder;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import static com.example.theschulk.recipesnow.Fragments.IngredientFragment.*;
 
@@ -64,10 +53,12 @@ RecipeDescriptionListActivity extends AppCompatActivity implements RecipeShortDe
             mTwoPane = false;
         }
 
-
-
         if (savedInstanceState == null) {
             if(!mTwoPane) {
+                String mRecipeTitle = passedInRecipeModel.getName().toString();
+                TextView mRecipeTitleTextView = (TextView) findViewById(R.id.tv_current_recipe_title);
+                mRecipeTitleTextView.setText(mRecipeTitle);
+
                 Fragment RecipeStepFragment = RecipeShortDescriptionListDetailFragment.newInstance(this, passedInRecipeModel);
                 Fragment IngredientFragment = IngredientNewInstance(this, passedInRecipeModel);
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -89,36 +80,22 @@ RecipeDescriptionListActivity extends AppCompatActivity implements RecipeShortDe
                             linearLayoutManager.getOrientation());
                     mStepDescriptionListRecyclerView.addItemDecoration(dividerItemDecoration);
                 }
+                String mRecipeTitle = passedInRecipeModel.getName().toString();
+                TextView mRecipeTitleTextView = (TextView) findViewById(R.id.tv_current_recipe_title);
+                mRecipeTitleTextView.setText(mRecipeTitle);
 
                 List<StepModel> startingRecipeStepModel = passedInRecipeModel.getSteps();
                 StepModel firstRecipeStep = startingRecipeStepModel.get(0);
 
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 Fragment recipeStepInstructionFragment = RecipeSingleStepInstructionsFragment.newInstance(this, firstRecipeStep);
+                Fragment IngredientFragment = IngredientNewInstance(this, passedInRecipeModel);
                 fragmentManager.beginTransaction().
+                        add(R.id.fl_recipe_ingredient, IngredientFragment, null).
                         add(R.id.fl_detail_instructions, recipeStepInstructionFragment).
                         commit();
             }
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == android.R.id.home) {
-            navigateUpTo(new Intent(this, RecipeListActivity.class));
-            return true;
-        } else if (id == R.menu.main){
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void SwapFragment(Fragment recipeSingleStepFragment){
