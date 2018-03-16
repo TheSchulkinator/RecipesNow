@@ -20,7 +20,7 @@ public class IngredientRecyclerViewAdapter extends  RecyclerView.Adapter<Ingredi
     @Override
     public IngredientViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-        int layoutIdForRecycleView = R.layout.ingredient_fragment;
+        int layoutIdForRecycleView = R.layout.ingredient_fragment_recyclerview;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParent = false;
 
