@@ -74,18 +74,20 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
             mCurrentExoPlayerPosition = savedInstanceState.getLong(getString(R.string.saveInstanceStateExoPlayerPosition), 0);
             mIsExoPlayerPlaying = savedInstanceState.getBoolean(getString(R.string.saveInstanceStateExoPlayerPlaying), true);
         }
-
-
-        View rootView = inflater.inflate(R.layout.recipe_single_step_instructions_fragment, container, false);
-
-        mLongDescriptionTextView = (TextView) rootView.findViewById(R.id.tv_long_description);
-
+        View rootView;
         recipeVideoUrl = mCurrentStepModel.getVideoURL();
+        recipeThumbnailUrl = mCurrentStepModel.getThumbnailURL();
 
 
-        if(recipeVideoUrl != null && recipeVideoUrl!= "") {
+        if(recipeVideoUrl != null && recipeVideoUrl!= "" || recipeThumbnailUrl != null && recipeThumbnailUrl!= "") {
+            rootView = inflater.inflate(R.layout.recipe_single_step_instructions_fragment, container, false);
+            mLongDescriptionTextView = (TextView) rootView.findViewById(R.id.tv_long_description);
             mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.exo_recipe_video);
             InitializeExoPlayer();
+            mLongDescriptionTextView.setText(mCurrentStepModel.getDescription());
+        } else {
+            rootView = inflater.inflate(R.layout.recipe_single_step_instructions_no_video, container, false);
+            mLongDescriptionTextView = (TextView) rootView.findViewById(R.id.tv_no_video_long_description);
             mLongDescriptionTextView.setText(mCurrentStepModel.getDescription());
         }
 
@@ -94,8 +96,7 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
 
     private void InitializeExoPlayer(){
         Context context = getActivity();
-        recipeVideoUrl = mCurrentStepModel.getVideoURL();
-        if(recipeVideoUrl != null && recipeVideoUrl!= "") {
+        
         BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
         TrackSelection.Factory videoTrackSelectionFactory =
                 new AdaptiveTrackSelection.Factory(bandwidthMeter);
@@ -105,14 +106,20 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
         mSimpleExoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
         mSimpleExoPlayerView.setPlayer(mSimpleExoPlayer);
 
-            Uri recipeVideoUri = Uri.parse(recipeVideoUrl).buildUpon().build();
+        Uri recipeVideoUri;
 
-            MediaSource mediaSource = new ExtractorMediaSource(recipeVideoUri, new DefaultDataSourceFactory(context, Util.getUserAgent(context, "RecipesNow")),
-                    new DefaultExtractorsFactory(), null, null);
-            mSimpleExoPlayer.prepare(mediaSource);
-            mSimpleExoPlayer.seekTo(mCurrentExoPlayerPosition);
-            mSimpleExoPlayer.setPlayWhenReady(mIsExoPlayerPlaying);
+        if(recipeVideoUrl != null && recipeVideoUrl!= ""){
+            recipeVideoUri = Uri.parse(recipeVideoUrl).buildUpon().build();
+        } else {
+            recipeVideoUri = Uri.parse(recipeThumbnailUrl).buildUpon().build();
         }
+
+        MediaSource mediaSource = new ExtractorMediaSource(recipeVideoUri, new DefaultDataSourceFactory(context, Util.getUserAgent(context, "RecipesNow")),
+                new DefaultExtractorsFactory(), null, null);
+        mSimpleExoPlayer.prepare(mediaSource);
+        mSimpleExoPlayer.seekTo(mCurrentExoPlayerPosition);
+        mSimpleExoPlayer.setPlayWhenReady(mIsExoPlayerPlaying);
+
     }
 
     @Override
