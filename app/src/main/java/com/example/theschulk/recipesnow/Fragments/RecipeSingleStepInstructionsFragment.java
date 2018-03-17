@@ -34,7 +34,20 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
     TextView mLongDescriptionTextView;
     SimpleExoPlayerView mSimpleExoPlayerView;
     SimpleExoPlayer mSimpleExoPlayer;
+    long mCurrentExoPlayerPosition;
+    boolean mIsExoPlayerPlaying;
     private String recipeVideoUrl;
+    private String recipeThumbnailUrl;
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        mCurrentExoPlayerPosition = mSimpleExoPlayer.getCurrentPosition();
+        mIsExoPlayerPlaying = mSimpleExoPlayer.getPlayWhenReady();
+
+        savedInstanceState.putLong(getString(R.string.saveInstanceStateExoPlayerPosition), mCurrentExoPlayerPosition);
+        savedInstanceState.putBoolean(getString(R.string.saveInstanceStateExoPlayerPlaying), mIsExoPlayerPlaying);
+    }
 
     public static RecipeSingleStepInstructionsFragment newInstance (Context context, StepModel currentStep){
         RecipeSingleStepInstructionsFragment recipeSingleStepInstructionsFragment = new RecipeSingleStepInstructionsFragment();
@@ -56,11 +69,20 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        if(savedInstanceState != null){
+            mCurrentExoPlayerPosition = savedInstanceState.getLong(getString(R.string.saveInstanceStateExoPlayerPosition), 0);
+            mIsExoPlayerPlaying = savedInstanceState.getBoolean(getString(R.string.saveInstanceStateExoPlayerPlaying), true);
+        }
+
+
         View rootView = inflater.inflate(R.layout.recipe_single_step_instructions_fragment, container, false);
 
         mLongDescriptionTextView = (TextView) rootView.findViewById(R.id.tv_long_description);
 
         recipeVideoUrl = mCurrentStepModel.getVideoURL();
+
+
         if(recipeVideoUrl != null && recipeVideoUrl!= "") {
             mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.exo_recipe_video);
             InitializeExoPlayer();
@@ -88,7 +110,8 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
             MediaSource mediaSource = new ExtractorMediaSource(recipeVideoUri, new DefaultDataSourceFactory(context, Util.getUserAgent(context, "RecipesNow")),
                     new DefaultExtractorsFactory(), null, null);
             mSimpleExoPlayer.prepare(mediaSource);
-            mSimpleExoPlayer.setPlayWhenReady(true);
+            mSimpleExoPlayer.seekTo(mCurrentExoPlayerPosition);
+            mSimpleExoPlayer.setPlayWhenReady(mIsExoPlayerPlaying);
         }
     }
 
