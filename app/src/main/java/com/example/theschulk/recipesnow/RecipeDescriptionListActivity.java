@@ -34,6 +34,7 @@ RecipeDescriptionListActivity extends AppCompatActivity implements RecipeShortDe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_short_description_list);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intentThatStartedTheActivity = getIntent();
 

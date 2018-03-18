@@ -20,7 +20,8 @@
         </activity>
         <activity
             android:name=".RecipeDescriptionListActivity"
-            android:label="@string/title_recipedetail_detail"></activity>
+            android:label="@string/title_recipedetail_detail"
+            android:parentActivityName=".RecipeListActivity"></activity>
 
         <receiver android:name=".RecipeIngredientListWidget">
             <intent-filter>

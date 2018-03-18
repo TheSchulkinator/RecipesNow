@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.theschulk.recipesnow.Models.StepModel;
@@ -26,12 +27,14 @@ import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.squareup.picasso.Picasso;
 
 
 public class RecipeSingleStepInstructionsFragment extends Fragment {
 
     StepModel mCurrentStepModel;
     TextView mLongDescriptionTextView;
+    ImageView mCurrentImageView;
     SimpleExoPlayerView mSimpleExoPlayerView;
     SimpleExoPlayer mSimpleExoPlayer;
     long mCurrentExoPlayerPosition;
@@ -79,14 +82,17 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
         recipeThumbnailUrl = mCurrentStepModel.getThumbnailURL();
 
 
-        if(recipeVideoUrl != null && recipeVideoUrl!= "" || recipeThumbnailUrl != null && recipeThumbnailUrl!= "") {
+        if(recipeVideoUrl != null && recipeVideoUrl!= "") {
             rootView = inflater.inflate(R.layout.recipe_single_step_instructions_fragment, container, false);
             mLongDescriptionTextView = (TextView) rootView.findViewById(R.id.tv_long_description);
             mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.exo_recipe_video);
             InitializeExoPlayer();
             mLongDescriptionTextView.setText(mCurrentStepModel.getDescription());
         } else {
+            Uri thumbnailUrl = Uri.parse(recipeThumbnailUrl).buildUpon().build();
             rootView = inflater.inflate(R.layout.recipe_single_step_instructions_no_video, container, false);
+            mCurrentImageView = (ImageView) rootView.findViewById(R.id.single_step_image_view);
+            Picasso.get().load(thumbnailUrl).error(R.drawable.no_video).into(mCurrentImageView);
             mLongDescriptionTextView = (TextView) rootView.findViewById(R.id.tv_no_video_long_description);
             mLongDescriptionTextView.setText(mCurrentStepModel.getDescription());
         }
@@ -106,13 +112,7 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
         mSimpleExoPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
         mSimpleExoPlayerView.setPlayer(mSimpleExoPlayer);
 
-        Uri recipeVideoUri;
-
-        if(recipeVideoUrl != null && recipeVideoUrl!= ""){
-            recipeVideoUri = Uri.parse(recipeVideoUrl).buildUpon().build();
-        } else {
-            recipeVideoUri = Uri.parse(recipeThumbnailUrl).buildUpon().build();
-        }
+        Uri recipeVideoUri = Uri.parse(recipeVideoUrl).buildUpon().build();
 
         MediaSource mediaSource = new ExtractorMediaSource(recipeVideoUri, new DefaultDataSourceFactory(context, Util.getUserAgent(context, "RecipesNow")),
                 new DefaultExtractorsFactory(), null, null);
