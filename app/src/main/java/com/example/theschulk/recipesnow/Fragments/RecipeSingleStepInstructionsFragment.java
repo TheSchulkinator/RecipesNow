@@ -125,27 +125,30 @@ public class RecipeSingleStepInstructionsFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-
-        mSimpleExoPlayer.stop();
-        mSimpleExoPlayer.release();
-        mSimpleExoPlayer = null;
+     if( mSimpleExoPlayer!= null) {
+         mSimpleExoPlayer.stop();
+         mSimpleExoPlayer.release();
+         mSimpleExoPlayer = null;
+     }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mSimpleExoPlayer.stop();
-        mSimpleExoPlayer.release();
-        mSimpleExoPlayer = null;
+        if( mSimpleExoPlayer!= null) {
+            mSimpleExoPlayer.stop();
+            mSimpleExoPlayer.release();
+            mSimpleExoPlayer = null;
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-
+        if( mSimpleExoPlayer!= null) {
             mSimpleExoPlayer.stop();
             mSimpleExoPlayer.release();
             mSimpleExoPlayer = null;
-
+        }
     }
 }
