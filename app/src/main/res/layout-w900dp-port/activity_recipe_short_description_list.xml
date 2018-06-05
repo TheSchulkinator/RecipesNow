@@ -26,7 +26,7 @@
                 android:id="@+id/rv_recipe_step_short_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true" />
+                />
 
             <FrameLayout
                 android:layout_width="match_parent"
