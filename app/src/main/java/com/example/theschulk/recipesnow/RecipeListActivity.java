@@ -1,11 +1,8 @@
 package com.example.theschulk.recipesnow;
 
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +10,6 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.widget.RemoteViews;
-
 import com.example.theschulk.recipesnow.Data.RecipeEndpointInterface;
 import com.example.theschulk.recipesnow.Data.RetrofitUtils;
 import com.example.theschulk.recipesnow.Database.IngredientContract;

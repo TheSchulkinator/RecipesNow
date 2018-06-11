@@ -1,11 +1,6 @@
 package com.example.theschulk.recipesnow.Utilities;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
 import com.example.theschulk.recipesnow.Models.IngredientModel;
-import com.example.theschulk.recipesnow.R;
 
 import java.util.List;
 

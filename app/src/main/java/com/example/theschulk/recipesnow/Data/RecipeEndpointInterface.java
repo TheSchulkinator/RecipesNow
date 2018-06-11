@@ -5,7 +5,6 @@ import com.example.theschulk.recipesnow.Models.RecipeModel;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.GET;
 
 

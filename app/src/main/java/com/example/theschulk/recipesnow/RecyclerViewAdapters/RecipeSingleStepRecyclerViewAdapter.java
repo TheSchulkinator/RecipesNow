@@ -5,9 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.theschulk.recipesnow.Models.RecipeModel;
-import com.example.theschulk.recipesnow.R;
-
 /**
  * Created by gregs on 7/19/2017.
  */

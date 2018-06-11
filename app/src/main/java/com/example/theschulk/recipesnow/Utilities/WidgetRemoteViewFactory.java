@@ -5,12 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.example.theschulk.recipesnow.Database.IngredientContract;
-import com.example.theschulk.recipesnow.Database.IngredientDbHelper;
 import com.example.theschulk.recipesnow.R;
 
 /**
