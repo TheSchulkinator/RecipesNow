@@ -30,4 +30,7 @@
     <string name="yellow_cake_action_button" translatable="false">com.example.theschulk.recipesnow.YELLOW_CAKE_BUTTON</string>
     <string name="cheesecake_action_button" translatable="false">com.example.theschulk.recipesnow.CHEESECAKE_BUTTON</string>
     <string name="widget_back_action_button" translatable="false">com.example.theschulk.recipesnow.WIDGET_BACK_BUTTON</string>
+
+    //Accesibility
+    <string name="step_content_description">Image to show the current step in the recipe</string>
 </resources>
