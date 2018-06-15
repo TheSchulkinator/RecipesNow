@@ -18,11 +18,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/yellow_cake_button"
-        android:text="Yellow Cake"/>
+        android:text="@string/yellow_cake_value"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cheesecake_button"
-        android:text="Cheesecake"/>
+        android:text="@string/cheesecake_value"/>
 
 </LinearLayout>
