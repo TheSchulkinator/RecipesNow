@@ -33,4 +33,6 @@
 
     //Accesibility
     <string name="step_content_description">Image to show the current step in the recipe</string>
+
+    <string name="next_ingredient">Next Ingredient List</string>
 </resources>

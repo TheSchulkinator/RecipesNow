@@ -7,13 +7,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/nutella_button"
-        android:text="Nutella Pie"
+        android:text="@string/nutella_value"
         />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/brownie_button"
-        android:text="Brownies"/>
+        android:text="@string/brownie_value"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
