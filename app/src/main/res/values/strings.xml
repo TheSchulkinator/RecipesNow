@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Recipes Now</string>
     <string name="title_recipedetail_list">RecipeDetails</string>
-    <string name="title_recipedetail_detail">RecipeDetail Detail</string>
+    <string name="title_recipedetail_detail">Recipe Detail</string>
     <string name="ingredient_list">Ingredient List:</string>
 
     <!--Base URL for retrofit call-->
@@ -14,7 +14,20 @@
     <string name="add_widget">Add widget</string>
 
     <!--Key for shared preference-->
-    <string name="widget_ingredient_key" translatable="false">widgetIngredientRecipe</string>
-    <string name="widget_quantity_key" translatable="false">widgetQuantityRecipe</string>
+    <string name="widget_view_key" translatable="false">widgetViewKey</string>
+    <string name="button_widget_key" translatable="false">buttonViewKey</string>
+    <string name="nutella_value" translatable="false">Nutella Pie</string>
+    <string name="brownie_value" translatable="false">Brownies</string>
+    <string name="yellow_cake_value" translatable="false">Yellow Cake</string>
+    <string name="cheesecake_value" translatable="false">Cheesecake</string>
     <string name="shared_preference_key" translatable="false">com.example.theschulk.recipesnow.sp_key</string>
+    <string name="saveInstanceStateExoPlayerPosition" translatable="false">saveExoPlayerPosition</string>
+    <string name="saveInstanceStateExoPlayerPlaying" translatable="false">saveExoPlayerPlaying</string>
+
+    <!--Action path Name-->
+    <string name="nutella_action_button" translatable="false">com.example.theschulk.recipesnow.NUTELLA_BUTTON</string>
+    <string name="brownie_action_button" translatable="false">com.example.theschulk.recipesnow.BROWNIE_BUTTON</string>
+    <string name="yellow_cake_action_button" translatable="false">com.example.theschulk.recipesnow.YELLOW_CAKE_BUTTON</string>
+    <string name="cheesecake_action_button" translatable="false">com.example.theschulk.recipesnow.CHEESECAKE_BUTTON</string>
+    <string name="widget_back_action_button" translatable="false">com.example.theschulk.recipesnow.WIDGET_BACK_BUTTON</string>
 </resources>

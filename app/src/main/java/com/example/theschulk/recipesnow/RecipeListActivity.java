@@ -66,7 +66,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListR
                 mRecipeViewAdapter.setRecipeListIntoRecyclerView(currentRecipes);
 
                 Boolean dbRecord = isRecipeSaved();
-                if(dbRecord){
+                if(!dbRecord){
                     saveIngredientToDb(currentRecipes);
                 }
             }
@@ -132,23 +132,6 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListR
     @Override
     public void onClick(RecipeModel selectedRecipeModel) {
         Context context = this;
-        /*
-        ingredientModelList = selectedRecipeModel.getIngredients();
-        String ingredientList = RecipeIngredientBuilder.IngredientListIngredientBuilder(ingredientModelList);
-        String ingredientQuantity = RecipeIngredientBuilder.IngredientListQuantityBuilder(ingredientModelList);
-
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(getString(R.string.widget_ingredient_key), ingredientList);
-        editor.putString(getString(R.string.widget_quantity_key), ingredientQuantity);
-        editor.commit();
-
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.recipe_ingredient_list_widget);
-        ComponentName thisWidget = new ComponentName(context, RecipeIngredientListWidget.class);
-        remoteViews.setTextViewText(R.id.appwidget_text, ingredientList);
-        appWidgetManager.updateAppWidget(thisWidget, remoteViews);*/
-
         Class destinationClass = RecipeDescriptionListActivity.class;
         Intent passedInIntent = new Intent(context, destinationClass);
         passedInIntent.putExtra("Selected Recipe", selectedRecipeModel);

@@ -20,17 +20,31 @@
         </activity>
         <activity
             android:name=".RecipeDescriptionListActivity"
-            android:label="@string/title_recipedetail_detail"></activity>
+            android:label="@string/title_recipedetail_detail"
+            android:parentActivityName=".RecipeListActivity"></activity>
 
         <receiver android:name=".RecipeIngredientListWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.example.theschulk.recipesnow.NUTELLA_BUTTON" />
+                <action android:name="com.example.theschulk.recipesnow.BROWNIE_BUTTON" />
+                <action android:name="com.example.theschulk.recipesnow.YELLOW_CAKE_BUTTON" />
+                <action android:name="com.example.theschulk.recipesnow.CHEESECAKE_BUTTON" />
+                <action android:name="com.example.theschulk.recipesnow.WIDGET_BACK_BUTTON" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/recipe_ingredient_list_widget_info" />
         </receiver>
+
+        <service android:name="com.example.theschulk.recipesnow.Utilities.RecipeWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:exported="false" />
+
+        <provider android:name="com.example.theschulk.recipesnow.Utilities.IngredientDataProvider"
+            android:authorities="com.example.theschulk.ingredientlistwidget.provider"
+            android:exported="true"/>
     </application>
 
 </manifest>
