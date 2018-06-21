@@ -1,7 +1,11 @@
 package com.example.theschulk.recipesnow;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,17 +14,27 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.theschulk.recipesnow.Fragments.RecipeShortDescriptionListDetailFragment;
 import com.example.theschulk.recipesnow.Fragments.RecipeSingleStepInstructionsFragment;
+import com.example.theschulk.recipesnow.Models.IngredientModel;
 import com.example.theschulk.recipesnow.Models.RecipeModel;
 import com.example.theschulk.recipesnow.Models.StepModel;
 import com.example.theschulk.recipesnow.RecyclerViewAdapters.RecipeShortDescriptionListRecyclerViewAdapter;
+import com.example.theschulk.recipesnow.Utilities.RecipeIngredientBuilder;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
-public class RecipeDescriptionListActivity extends AppCompatActivity implements RecipeShortDescriptionListRecyclerViewAdapter.RecipeDetailClickHandler{
+import static com.example.theschulk.recipesnow.Fragments.IngredientFragment.*;
+
+public class
+RecipeDescriptionListActivity extends AppCompatActivity implements RecipeShortDescriptionListRecyclerViewAdapter.RecipeDetailClickHandler{
 
     RecipeModel passedInRecipeModel;
     Boolean mTwoPane;
@@ -55,8 +69,10 @@ public class RecipeDescriptionListActivity extends AppCompatActivity implements 
         if (savedInstanceState == null) {
             if(!mTwoPane) {
                 Fragment RecipeStepFragment = RecipeShortDescriptionListDetailFragment.newInstance(this, passedInRecipeModel);
+                Fragment IngredientFragment = IngredientNewInstance(this, passedInRecipeModel);
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction().
+                        add(R.id.fl_recipe_ingredient, IngredientFragment, null).
                         add(R.id.fl_step_detail_fragment, RecipeStepFragment, null).
                         commit();
             } else {
@@ -87,11 +103,20 @@ public class RecipeDescriptionListActivity extends AppCompatActivity implements 
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
         if (id == android.R.id.home) {
             navigateUpTo(new Intent(this, RecipeListActivity.class));
             return true;
+        } else if (id == R.menu.main){
         }
         return super.onOptionsItemSelected(item);
     }
@@ -116,4 +141,6 @@ public class RecipeDescriptionListActivity extends AppCompatActivity implements 
         Fragment recipeSingleStepInstructions = RecipeSingleStepInstructionsFragment.newInstance(this, stepModel);
         SwapFragment(recipeSingleStepInstructions);
     }
+
+
 }
