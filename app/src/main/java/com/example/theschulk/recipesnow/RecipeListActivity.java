@@ -126,6 +126,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeListR
                 null);
 
         isData = (cursor.getCount() > 0);
+        cursor.close();
         return isData;
     }
 
